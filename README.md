@@ -1,6 +1,6 @@
 # Compare two models of human values
 
-Tech stack: Python, R
+Tech stack: Python, R zi
 
 ---
 
