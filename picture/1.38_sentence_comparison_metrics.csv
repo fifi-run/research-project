@@ -1,0 +1,40 @@
+Label,Precision_ValuesML,Recall_ValuesML,F1_ValuesML,Accuracy_ValuesML,Precision_PVD,Recall_PVD,F1_PVD,Accuracy_PVD
+Self-direction: thought attained_label,0.348,0.662,0.456,0.985,0.016,0.268,0.03,0.833
+Self-direction: thought constrained_label,1,0.342,0.51,0.998,0.005,0.342,0.011,0.836
+Self-direction: action attained_label,0.639,0.632,0.635,0.981,0.04,0.249,0.068,0.824
+Self-direction: action constrained_label,0.829,0.5,0.624,0.995,0.009,0.198,0.018,0.832
+Stimulation attained_label,0.71,0.721,0.716,0.985,0.055,0.172,0.083,0.902
+Stimulation constrained_label,0.741,0.37,0.494,0.997,0.008,0.185,0.016,0.917
+Hedonism attained_label,0.898,0.726,0.803,0.998,0.027,0.178,0.047,0.965
+Hedonism constrained_label,0.632,0.429,0.511,0.998,0.015,0.25,0.028,0.967
+Achievement attained_label,0.806,0.657,0.724,0.976,0.093,0.259,0.137,0.841
+Achievement constrained_label,0.702,0.635,0.667,0.988,0.026,0.19,0.045,0.853
+Power: dominance attained_label,0.73,0.696,0.713,0.98,0.06,0.223,0.094,0.846
+Power: dominance constrained_label,0.554,0.718,0.625,0.988,0.029,0.273,0.053,0.859
+Power: resources attained_label,0.666,0.72,0.692,0.977,0.07,0.261,0.11,0.848
+Power: resources constrained_label,0.623,0.689,0.655,0.987,0.032,0.242,0.056,0.856
+Face attained_label,0.412,0.667,0.509,0.988,0.009,0.132,0.018,0.858
+Face constrained_label,0.704,0.656,0.679,0.993,0.011,0.135,0.02,0.857
+Security: personal attained_label,0.452,0.733,0.559,0.993,0.01,0.167,0.018,0.891
+Security: personal constrained_label,0.601,0.801,0.687,0.99,0.017,0.134,0.031,0.885
+Security: societal attained_label,0.656,0.757,0.703,0.976,0.078,0.217,0.115,0.873
+Security: societal constrained_label,0.733,0.81,0.769,0.976,0.097,0.202,0.131,0.865
+Tradition attained_label,0.781,0.715,0.747,0.992,0.073,0.151,0.099,0.956
+Tradition constrained_label,0.774,0.49,0.6,0.998,0.016,0.163,0.03,0.965
+Conformity: rules attained_label,0.745,0.735,0.74,0.978,0.092,0.324,0.143,0.835
+Conformity: rules constrained_label,0.575,0.78,0.662,0.978,0.055,0.297,0.093,0.838
+Conformity: interpersonal attained_label,0.42,0.685,0.521,0.992,0.007,0.174,0.014,0.846
+Conformity: interpersonal constrained_label,0.585,0.648,0.615,0.993,0.007,0.123,0.013,0.844
+Humility attained_label,0.429,0.529,0.474,0.997,0.006,0.088,0.011,0.965
+Humility constrained_label,0.001,1,0.001,0.001,0,0,0,0.966
+Benevolence: caring attained_label,0.751,0.617,0.678,0.988,0.047,0.254,0.079,0.879
+Benevolence: caring constrained_label,0.471,0.604,0.529,0.996,0.006,0.189,0.012,0.887
+Benevolence: dependability attained_label,0.528,0.715,0.607,0.985,0.029,0.201,0.051,0.88
+Benevolence: dependability constrained_label,0.87,0.351,0.5,0.997,0.01,0.281,0.019,0.888
+Universalism: concern attained_label,0.619,0.836,0.712,0.978,0.049,0.24,0.082,0.824
+Universalism: concern constrained_label,0.598,0.667,0.63,0.989,0.022,0.245,0.041,0.833
+Universalism: nature attained_label,0.591,0.956,0.731,0.988,0.032,0.299,0.057,0.834
+Universalism: nature constrained_label,0.573,0.913,0.704,0.992,0.018,0.28,0.033,0.836
+Universalism: tolerance attained_label,0.673,0.587,0.627,0.997,0.008,0.286,0.015,0.839
+Universalism: tolerance constrained_label,0.667,0.656,0.661,0.997,0.005,0.172,0.009,0.838
+Macro Avg.,0.6338684210526315,0.6685526315789474,0.6176315789473684,0.9627631578947369,0.03128947368421053,0.21168421052631578,0.05078947368421053,0.8726578947368421
