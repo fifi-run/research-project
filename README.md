@@ -1,30 +1,22 @@
 # Compare two models of human values
 
-Tech stack: Python, R zi
+Tech stack: Python, R
 
 ---
 
-## Table of Contents
+## Illustrate
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+picture file include all the comparison results of macro and micro in F1-score, precision, recall and accuracy.
+results file include all the comparison codes.
+valueeval24 file include the sentence and paragraph dataset.
 
 ---
 
-## Installation
+## Compare Models
 
-Step-by-step instructions on how to install and set up the project:
+ValuesML: https://ceur-ws.org/Vol-3740/paper-330.pdf
+PVD: https://onlinelibrary.wiley.com/doi/full/10.1002/per.2294
 
-```bash
-# Clone the repo
-git clone https://github.com/USERNAME/REPO-NAME.git
+---
 
-# Navigate into the project folder
-cd REPO-NAME
 
-# Install dependencies (if any)
-# e.g., for Python projects:
-pip install -r requirements.txt
