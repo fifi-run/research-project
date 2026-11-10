@@ -245,3 +245,11 @@ Wang, Z. (2025). *Lexical Rules or Learned Representations? Assessing Dictionary
 **Author:** Ziyi Wang  
 **Durham University — Master of Data Science**  
 **September 2025**
+
+---
+
+## Additional Research and Coursework Projects
+
+Selected supporting projects in statistical data science, applied machine learning, collaborative health-risk modelling and AI ethics are documented in the [Research & Data Science Portfolio](projects/README.md).
+
+The portfolio includes individual coursework and a clearly attributed Group 28 project. Each project README describes its research question, methods, reported findings, data provenance, reproducibility status and limitations. The Master dissertation remains the primary independent research project in this repository.
