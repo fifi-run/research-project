@@ -4,9 +4,10 @@
 **Author:** Ziyi Wang  
 **Degree:** Master of Data Science, Durham University  
 **Project:** Data Science Research Project 24/25  
-**Dissertation:** September 2025
+**Dissertation:** September 2025  
+**Repository:** https://github.com/fifi-run/research-project
 
-[Detailed methodology and implementation notes](docs/METHODOLOGY.md)
+[Research methodology](docs/METHODOLOGY.md)
 
 ---
 
@@ -22,13 +23,15 @@ The dissertation reports that ValuesML achieves the highest macro-F1 in both sen
 
 ### Contributions
 
-1. Comparative evaluation of a theory-driven lexical resource and a contextual transformer model.
-2. Sentence- and paragraph-level input comparison.
+1. A comparative evaluation of a theory-driven lexical resource and a contextual transformer model.
+2. A controlled comparison of sentence- and paragraph-level inputs.
 3. Two strategies for converting PVD frequency scores into binary predictions.
-4. Harmonisation of ValuesML's fine-grained labels into the ten broad PVD categories.
-5. Aggregate and category-level evaluation.
+4. A harmonisation procedure that aggregates ValuesML's fine-grained labels into the ten broader PVD categories.
+5. Aggregate and per-category evaluation to reveal differences hidden by overall metrics.
 
 ## Conceptual background
+
+Human values are abstract, trans-situational guiding principles. Their expression in political language may be explicit, implicit, paraphrased or dependent on surrounding discourse.
 
 | Approach | Principle | Strength | Limitation |
 |---|---|---|---|
@@ -39,18 +42,18 @@ The study evaluates existing tools and their outputs; it does not claim to train
 
 ## Data
 
-The repository includes ValuesCorpus task data under `valueeval24/`, with this visible split structure:
+The repository includes ValuesCorpus task data under `valueeval24/`, with the following visible split structure:
 
 - `training/` and `training-english/`: sentence and label TSV files.
 - `validation/` and `validation-english/`: sentence and label TSV files.
 - `test/` and `test-english/`: sentence TSV files.
-- `sentences.tsv`: an additional sentence file at the data-directory root.
+- `sentences.tsv`: an additional sentence data file at the data-directory root.
 
 The dissertation states that the experiment uses the English-language subset of the validation split. It reports **14,904 sentence units** and constructs **523 paragraph units** by grouping sentences by `Text_ID` and concatenating them in `Sentence_ID` order.
 
 The task annotation scheme is based on Schwartz's refined values: 19 values distinguished as attained or constrained, resulting in 38 fine-grained labels. The project maps these to ten broad categories for the main comparison.
 
-Data source: [CLEF 2024 Touché / ValuesCorpus data portal](https://webis.de/data.html?q=touche24). Consult the original dataset licence and terms before redistribution. The presence of data files in this repository does not independently establish redistribution rights.
+Data source: [CLEF 2024 Touché / ValuesCorpus data portal](https://webis.de/data.html?q=touche24). Please consult the dataset's original licence and terms before redistribution. The presence of data files in this repository should not be taken as an independent statement of redistribution rights.
 
 ## Methodology
 
@@ -68,17 +71,17 @@ This produces six main configurations: ValuesML, PVD-hard and PVD-soft at each o
 
 ### PVD hard binarisation
 
-The strict method converts every non-zero PVD category score to 1 and leaves zero scores as 0. It is transparent, but treats all non-zero matches as equivalent evidence.
+The strict method converts every non-zero PVD category score to 1 and leaves zero scores as 0. It is simple and transparent, but treats all non-zero matches as equivalent evidence.
 
 ### PVD soft scoring and thresholding
 
-The dissertation describes a soft procedure in which PVD category scores are min–max scaled to [0, 1], followed by category-specific threshold selection using an F1-based search. The dissertation specifies thresholds from 0.1 to 0.9 in increments of 0.1.
+The dissertation describes a soft procedure in which PVD category scores are min–max scaled to the [0, 1] range, followed by category-specific threshold selection using an F1-based search. The dissertation specifies a grid from 0.1 to 0.9 in increments of 0.1.
 
-**Implementation note:** the repository contains multiple exploratory R scripts for PVD normalisation and thresholding. Some scripts perform row-wise min–max scaling and contain alternative threshold-search variants. These should not all be assumed to implement one identical final procedure. See [Implementation notes](docs/METHODOLOGY.md#implementation-notes-and-reproducibility-cautions).
+**Implementation note:** the repository contains multiple exploratory R scripts for PVD normalisation and thresholding. Some scripts perform row-wise min–max scaling and contain alternative threshold-search variants. They should not all be assumed to implement one identical final procedure. See [Implementation notes](docs/METHODOLOGY.md#implementation-notes-and-reproducibility-cautions).
 
 ### ValuesML and label harmonisation
 
-ValuesML outputs in the refined 38-label scheme are aggregated into ten broad Schwartz categories. The conceptual mapping documented in the dissertation is:
+ValuesML outputs in the refined 38-label scheme are aggregated into ten broad Schwartz categories. The repository includes R scripts that perform the aggregation and comparison. The conceptual mapping documented in the dissertation is:
 
 | Broad PVD category | ValuesML subcategories |
 |---|---|
@@ -93,7 +96,7 @@ ValuesML outputs in the refined 38-label scheme are aggregated into ten broad Sc
 | Benevolence (`Values_BE`) | Benevolence: caring; benevolence: dependability |
 | Universalism (`Values_UN`) | Universalism: concern; universalism: nature; universalism: tolerance |
 
-The mapping is from fine-grained ValuesML labels to the broad ten-category space. A broad PVD class is not projected back into multiple fine-grained labels.
+The mapping is from the fine-grained ValuesML labels to the broad ten-category space. A broad PVD class is not projected back into multiple fine-grained labels.
 
 ### Evaluation
 
@@ -131,9 +134,11 @@ Two examples show the different error profiles:
 - **Tradition:** ValuesML has recall 1.00 and precision 0.19 (F1 0.32); PVD-soft has precision 0.56 and recall 0.14 (F1 0.22).
 - **Hedonism:** ValuesML has precision 0.95 and recall 0.67; PVD-soft has precision 0.33 and recall 0.16.
 
+These examples illustrate how a contextual model may identify more possible instances while a dictionary can be more conservative and miss expressions that do not match its lexical entries.
+
 ## Repository structure
 
-This overview is based on files currently present on the `main` branch.
+The following structure is based on the files currently present on the `main` branch.
 
 ```text
 research-project/
@@ -163,20 +168,22 @@ research-project/
 
 ### Key analysis scripts
 
+The repository includes (among others):
+
 | Script | Observed role from code |
 |---|---|
-| `results/10_sentence_compare.R` | Align sentence-level reference labels, ValuesML predictions and PVD scores; calculate category and overall metrics; create plots |
-| `results/merged result/merged.R` | Aggregate sentence text, labels, PVD outputs and ValuesML outputs by text |
-| `results/merged result/10-38.R` | Aggregate fine-grained label columns into ten broad categories |
-| `results/merged result/Compare_10map_min-max_paragraph.R` | Compare paragraph-level ten-category ValuesML and PVD predictions |
-| `results/merged result/min-max_compareall.R` | Fine-grained comparison workflow and per-label metric functions |
-| `results/整体结果对比.R` | Plot results across sentence/paragraph units and ten/38 label configurations |
+| `results/10_sentence_compare.R` | Align sentence-level labels and model predictions; calculate per-category and overall metrics; create comparison plots |
+| `results/merged result/merged.R` | Aggregate sentence text, labels, PVD outputs and ValuesML outputs to text-level records |
+| `results/merged result/10-38.R` | Aggregate fine-grained label columns into ten broad value categories |
+| `results/merged result/Compare_10map_min-max_paragraph.R` | Compare paragraph-level ten-category ValuesML and PVD predictions using precision, recall, F1 and accuracy |
+| `results/merged result/min-max_compareall.R` | Compare fine-grained model outputs and compute macro and per-label metrics |
+| `results/整体结果对比.R` | Prepare an overall comparison dataset and plot results across input granularity and label configurations |
 
-These descriptions reflect code inspection, not a guaranteed execution order. See the methodology document for implementation cautions.
+The repository contains multiple intermediate and exploratory analysis scripts. The table describes observed code responsibilities, not a guaranteed execution order.
 
 ## Technology
 
-The inspected scripts use **R** and packages including:
+The scripts inspected use **R** and packages including:
 
 - `tidyverse` (including data manipulation and plotting workflows)
 - `readr`
@@ -187,26 +194,40 @@ The inspected scripts use **R** and packages including:
 - `caret` (in some scripts)
 - `PRROC` (in some scripts)
 
-The original repository README also identifies Python as part of the technology stack, but the visible file tree is predominantly R scripts and TSV/CSV outputs. A complete Python dependency list and a pinned R package lockfile are not present in the inspected top-level tree.
+The repository README also identifies Python as part of the technology stack, but the visible file tree is predominantly R scripts and TSV/CSV outputs. A complete Python dependency list and a pinned R package lockfile are not currently present in the inspected top-level tree.
 
 ## Reproducibility
 
-The repository contains analysis scripts and intermediate results, but does not currently provide one verified entry point that runs the full pipeline end-to-end. Several scripts refer to input filenames that are not at the same relative path as the script, and some refer to intermediate files not present in the repository tree.
+The repository contains analysis scripts and intermediate results, but it does not currently provide a single verified entry point that runs the full pipeline end-to-end. Several scripts refer to input filenames that are not at the same relative path as the script, and some refer to intermediate files not present in the repository tree. Consequently, the safest way to inspect the work is:
 
-To inspect the source:
+1. Clone the repository.
+2. Inspect the input filenames at the top of the chosen R script.
+3. Set the working directory or file paths so that those inputs resolve.
+4. Install the R packages imported by that script.
+5. Run one analysis script at a time.
+6. Compare regenerated tables and plots against the committed output files.
+
+Example commands to obtain the source:
 
 ```bash
 git clone https://github.com/fifi-run/research-project.git
 cd research-project
 ```
 
-Then inspect each script's input filenames, set its working directory or paths, install the packages it imports, and run scripts independently. There is intentionally no blanket `source()` command: the current scripts use different intermediate filenames and working-directory assumptions.
+There is intentionally no blanket `source()` command here: the current scripts use different intermediate filenames and working-directory assumptions, so claiming a one-command reproduction would be misleading.
 
 ## Limitations and future work
 
-The dissertation identifies limited language/domain coverage, loss of detail during label aggregation, calibration overfitting risk, the semantic limitations of dictionaries, and untested temporal/cultural variation.
+The dissertation identifies the following limitations:
 
-Possible extensions include multilingual and diachronic corpora, an independent held-out test set, semi-supervised dictionary expansion, and hybrid systems combining transparent lexical evidence with contextual language representations.
+1. The evaluation focuses on English political discourse and does not establish cross-domain performance on everyday language or social media.
+2. The ten-category aggregation necessarily loses some distinctions in ValuesML's 38-label output.
+3. Soft threshold tuning can overfit when the threshold-selection and final evaluation data are not independent.
+4. A dictionary's lack of semantic context cannot be fully corrected through threshold calibration.
+5. Cultural and temporal changes in value expression are not evaluated.
+6. PVD is more transparent, whereas ValuesML offers stronger contextual modelling but is less directly interpretable.
+
+Suggested extensions include testing multilingual and diachronic corpora, evaluating on an independent held-out test set, semi-supervised dictionary expansion, and hybrid systems that combine transparent lexical evidence with contextual language representations.
 
 ## References
 
@@ -221,4 +242,6 @@ Wang, Z. (2025). *Lexical Rules or Learned Representations? Assessing Dictionary
 
 ---
 
-**Ziyi Wang** · Durham University · September 2025
+**Author:** Ziyi Wang  
+**Durham University — Master of Data Science**  
+**September 2025**
